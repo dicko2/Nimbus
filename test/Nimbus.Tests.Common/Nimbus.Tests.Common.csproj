@@ -31,6 +31,7 @@
     <ProjectReference Include="../../src/extensions/Nimbus.Logger.Serilog/Nimbus.Logger.Serilog.csproj" />
     <ProjectReference Include="../../src/extensions/Nimbus.Ninject/Nimbus.Ninject.csproj" />
     <ProjectReference Include="../../src/extensions/Nimbus.Unity/Nimbus.Unity.csproj" />
+    <ProjectReference Include="../../src/extensions/Nimbus.Windsor/Nimbus.Windsor.csproj" />
     <ProjectReference Include="../../src/Nimbus.InfrastructureContracts/Nimbus.InfrastructureContracts.csproj" />
     <ProjectReference Include="../../src/Nimbus.MessageContracts/Nimbus.MessageContracts.csproj" />
     <ProjectReference Include="../../src/Nimbus/Nimbus.csproj" />
