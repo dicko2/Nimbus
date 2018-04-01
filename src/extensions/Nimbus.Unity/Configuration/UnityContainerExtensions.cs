@@ -1,6 +1,7 @@
-using Microsoft.Practices.Unity;
+using System;
 using Nimbus.DependencyResolution;
 using Nimbus.Unity.Infastructure;
+using Unity;
 
 namespace Nimbus.Unity.Configuration
 {

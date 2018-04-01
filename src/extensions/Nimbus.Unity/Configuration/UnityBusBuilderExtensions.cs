@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
-using Microsoft.Practices.Unity;
 using Nimbus.Configuration;
 using Nimbus.DependencyResolution;
 using Nimbus.Extensions;
 using Nimbus.Infrastructure;
 using Nimbus.Infrastructure.Logging;
 using Nimbus.Unity.Infastructure;
+using Unity;
 
 namespace Nimbus.Unity.Configuration
 {

@@ -1,5 +1,5 @@
-﻿using Microsoft.Practices.Unity;
-using Nimbus.DependencyResolution;
+﻿using Nimbus.DependencyResolution;
+using Unity;
 
 namespace Nimbus.Unity.Infastructure
 {
