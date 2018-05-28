@@ -51,7 +51,10 @@ Task("Build")
     .Does(() =>
     {
         var buildSettings = new DotNetCoreBuildSettings {
-            Configuration = configuration
+            Configuration = configuration,
+            buildSettings.ArgumentCustomization = args 
+                args.Append($"/p:Version={nugetVersion}")
+                    Append($"/p:InformationalVersion={gitVersionInfo.InformationalVersion}")
         };
 
         switch((int)Environment.OSVersion.Platform) {
@@ -85,7 +88,9 @@ Task("Test")
         foreach(var testProject in testProjects)
         {
             DotNetCoreTest(testProject.FullPath, new DotNetCoreTestSettings {
-                Configuration = configuration
+                Configuration = configuration,
+                Logger = "trx",
+                NoBuild = true
             });
         }
     });
@@ -101,6 +106,9 @@ Task("Pack")
             DotNetCorePack(project.FullPath, new DotNetCorePackSettings
             {
                 Configuration = configuration,
+                ArgumentCustomization = args =>
+                    args.Append($"/p:Version={nugetVersion}")
+                        .Append($"/p:InformationalVersion={gitVersionInfo.InformationalVersion}")
             });
         }
     });
