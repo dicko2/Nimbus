@@ -9,13 +9,11 @@
     <PackageProjectUrl>http://nimbusapi.com/</PackageProjectUrl>
     <PackageTags>azure servicebus unity nimbus</PackageTags>
     <TargetFrameworks>netstandard2.0; net462</TargetFrameworks>
-    <VersionPrefix>3.0.1</VersionPrefix>
-    <VersionSuffix>issue-275.1</VersionSuffix>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommonServiceLocation" Version="1.0.0" />
     <PackageReference Include="CommonServiceLocator" Version="2.0.3" />
-    <PackageReference Include="Unity" Version="5.8.4" />
+    <PackageReference Include="Unity" Version="5.8.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../Nimbus/Nimbus.csproj" />

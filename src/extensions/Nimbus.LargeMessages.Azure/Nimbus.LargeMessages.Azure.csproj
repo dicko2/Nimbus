@@ -9,11 +9,9 @@
     <PackageProjectUrl>http://nimbusapi.com/</PackageProjectUrl>
     <PackageTags>azure,servicebus,autofac</PackageTags>
     <TargetFrameworks>netstandard2.0; net462</TargetFrameworks>
-    <VersionPrefix>3.0.1</VersionPrefix>
-    <VersionSuffix>issue-275.1</VersionSuffix>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WindowsAzure.Storage" Version="9.1.0" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
   <ItemGroup>

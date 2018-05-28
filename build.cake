@@ -48,8 +48,6 @@ Task("Clean")
 );
 
 Task("Build")
-    .IsDependentOn("SetVersion")
-    .IsDependentOn("Restore")
     .Does(() =>
     {
         var buildSettings = new DotNetCoreBuildSettings {
@@ -79,54 +77,6 @@ Task("Build")
     }
 );
 
-Task("SetVersion")
-    .Does(() =>
-    {
-        var projects = GetFiles("./src/**/*.csproj");
-
-        foreach(var project in projects)
-        {
-            var document = XDocument.Load(project.FullPath);
-            var propertyGroup = document.Descendants("PropertyGroup")
-                .FirstOrDefault();
-            var versionPrefix = propertyGroup.Descendants("VersionPrefix")
-                .FirstOrDefault();
-            var versionSuffix = propertyGroup.Descendants("VersionSuffix")
-                .FirstOrDefault();
-
-            if (versionPrefix != null)
-            {
-                Information("Version Prefix is present, Setting {0}", gitVersionInfo.MajorMinorPatch);
-                versionPrefix.SetValue(gitVersionInfo.MajorMinorPatch);
-            } else
-            {
-                Information("Version Prefix is not present, Writing {0}", gitVersionInfo.MajorMinorPatch);
-                propertyGroup.SetElementValue("VersionPrefix", gitVersionInfo.MajorMinorPatch);
-            }
-
-            if (versionSuffix != null)
-            {
-                Information("Version Suffix is present, Setting {0}", gitVersionInfo.PreReleaseTag);
-                versionSuffix.SetValue(gitVersionInfo.PreReleaseTag);
-            }
-            else
-            {
-                Information("Version Suffix is not present, Writing {0}", gitVersionInfo.PreReleaseTag);
-                propertyGroup.SetElementValue("VersionSuffix", gitVersionInfo.PreReleaseTag);
-            }
-
-            document.Save(project.FullPath);
-        }
-    }
-);
-
-Task("Restore")
-    .Does(() =>
-    {
-        DotNetCoreRestore();
-    }
-);
-
 Task("Test")
     .Does(() =>
     {
@@ -134,7 +84,9 @@ Task("Test")
 
         foreach(var testProject in testProjects)
         {
-            DotNetCoreTest(testProject.FullPath);
+            DotNetCoreTest(testProject.FullPath, new DotNetCoreTestSettings {
+                Configuration = configuration
+            });
         }
     });
 
