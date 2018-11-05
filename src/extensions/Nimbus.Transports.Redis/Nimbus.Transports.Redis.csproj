@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2.0; net462</TargetFrameworks>
+    <Configurations>Debug;Release</Configurations>
+    <AssemblyTitle>Nimbus.Transports.Redis</AssemblyTitle>
+    <Company></Company>
+    <Product>Nimbus.Transports.Redis</Product>
+    <Description>Redis transport layer for Nimbus</Description>
+    <Copyright>Copyright 2013</Copyright>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <Version>0.0.1</Version>
+    <AssemblyVersion>3.0.1.0</AssemblyVersion>
+    <FileVersion>3.0.1.0</FileVersion>
+    <Authors>Damian Maclennan and Andrew Harcourt</Authors>
+    <PackageId>Nimbus.Transports.Redis</PackageId>
+    <PackageProjectUrl>http://nimbusapi.com/</PackageProjectUrl>
+    <PackageReleaseNotes>Init.</PackageReleaseNotes>
+    <PackageTags>.NET service bus messaging Redis</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Nimbus.InfrastructureContracts\Nimbus.InfrastructureContracts.csproj" />
+    <ProjectReference Include="..\..\Nimbus.MessageContracts\Nimbus.MessageContracts.csproj" />
+    <ProjectReference Include="..\..\Nimbus\Nimbus.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	  <PackageReference Include="Fody" Version="3.0.0" />
+
+	  <PackageReference Include="NullGuard.Fody" Version="1.8.0" />
+    <PackageReference Include="StackExchange.Redis" Version="1.0.488" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FodyWeavers.xml" />
+  </ItemGroup>
+</Project>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Nimbus.Extensions;
 using Nimbus.IntegrationTests.Extensions;
+using Nimbus.Tests.Common.Stubs;
 using NUnit.Framework;
 using Shouldly;
 

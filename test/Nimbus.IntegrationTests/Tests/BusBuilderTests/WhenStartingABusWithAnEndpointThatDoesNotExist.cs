@@ -41,7 +41,7 @@ namespace Nimbus.IntegrationTests.Tests.BusBuilderTests
                 }
                 catch (Exception e)
                 {
-                    e.ShouldBeTypeOf<BusException>();
+                    e.ShouldBeOfType<BusException>();
                 }
             }
         }

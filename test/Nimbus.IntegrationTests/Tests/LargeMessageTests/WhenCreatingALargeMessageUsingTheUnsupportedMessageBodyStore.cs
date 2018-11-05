@@ -50,7 +50,7 @@ namespace Nimbus.IntegrationTests.Tests.LargeMessageTests
             }
             catch (Exception e)
             {
-                e.ShouldBeTypeOf<NotSupportedException>();
+                e.ShouldBeOfType<NotSupportedException>();
             }
         }
     }

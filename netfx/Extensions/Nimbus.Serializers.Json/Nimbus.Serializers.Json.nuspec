@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Nimbus.Serializers.Json</id>
-    <version>$version$$nugetPackageSuffix$</version>
+    <version>0.0.1</version>
     <title>Nimbus.Serializers.Json</title>
     <authors>Gert Jansen van Rensburg</authors>
     <owners>Damian Maclennan</owners>

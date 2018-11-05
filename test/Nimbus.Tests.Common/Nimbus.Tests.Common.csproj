@@ -4,11 +4,15 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ConfigInjector" Version="2.3.19" />
+    <PackageReference Include="ConfigInjector" Version="3.0.36" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
     <PackageReference Include="Microsoft.WindowsAzure.ConfigurationManager" Version="3.2.3" />
-    <PackageReference Include="nunit" Version="3.10.1" />
+    <PackageReference Include="nunit" Version="3.11.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+    <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.1" />
+    <PackageReference Include="Serilog.Enrichers.Thread" Version="3.0.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/extensions/Nimbus.Autofac/Nimbus.Autofac.csproj" />
@@ -16,8 +20,11 @@
     <ProjectReference Include="../../src/extensions/Nimbus.LargeMessages.FileSystem/Nimbus.LargeMessages.FileSystem.csproj" />
     <ProjectReference Include="../../src/extensions/Nimbus.Logger.Serilog/Nimbus.Logger.Serilog.csproj" />
     <ProjectReference Include="../../src/extensions/Nimbus.Ninject/Nimbus.Ninject.csproj" />
+	<ProjectReference Include="../../src/extensions/Nimbus.Transports.Redis/Nimbus.Transports.Redis.csproj" />
+	  <ProjectReference Include="../../src/extensions/Nimbus.Transports.InProcess/Nimbus.Transports.InProcess.csproj" />
+	  <ProjectReference Include="../../src/extensions/Nimbus.Transports.AzureServiceBus/Nimbus.Transports.AzureServiceBus.csproj" />
+	  <ProjectReference Include="../../src/extensions/Nimbus.Transports.WindowsServiceBus/Nimbus.Transports.WindowsServiceBus.csproj" />
     <ProjectReference Include="../../src/extensions/Nimbus.Serializers.Json/Nimbus.Serializers.Json.csproj" />
-    <ProjectReference Include="../../src/extensions/Nimbus.Unity/Nimbus.Unity.csproj" />
     <ProjectReference Include="../../src/extensions/Nimbus.Windsor/Nimbus.Windsor.csproj" />
     <ProjectReference Include="../../src/Nimbus.InfrastructureContracts/Nimbus.InfrastructureContracts.csproj" />
     <ProjectReference Include="../../src/Nimbus.MessageContracts/Nimbus.MessageContracts.csproj" />

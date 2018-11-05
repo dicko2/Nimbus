@@ -12,9 +12,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Fody" Version="3.0.3" />
-    <PackageReference Include="NullGuard.Fody" Version="1.8.0" />
-    <PackageReference Include="Virtuosity.Fody" Version="1.21.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../Nimbus/Nimbus.csproj" />

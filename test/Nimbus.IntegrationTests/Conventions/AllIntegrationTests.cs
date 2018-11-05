@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Nimbus.Extensions;
 using Nimbus.IntegrationTests.Extensions;
+using Nimbus.Tests.Common.Stubs;
 using NUnit.Framework;
 using Shouldly;
 

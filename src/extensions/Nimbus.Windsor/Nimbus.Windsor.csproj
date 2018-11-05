@@ -13,9 +13,6 @@
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.2.1" />
     <PackageReference Include="Castle.Windsor" Version="4.1.0" />
-    <PackageReference Include="Fody" Version="3.0.3" />
-    <PackageReference Include="NullGuard.Fody" Version="1.8.0" />
-    <PackageReference Include="Virtuosity.Fody" Version="1.21.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../Nimbus/Nimbus.csproj" />

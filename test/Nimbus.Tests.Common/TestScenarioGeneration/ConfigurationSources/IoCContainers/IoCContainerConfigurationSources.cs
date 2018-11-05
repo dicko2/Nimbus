@@ -12,7 +12,6 @@ namespace Nimbus.Tests.Common.TestScenarioGeneration.ConfigurationSources.IoCCon
             yield return new AutofacScenario();
             yield return new NinjectScenario();
             yield return new WindsorScenario();
-            yield return new UnityScenario();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

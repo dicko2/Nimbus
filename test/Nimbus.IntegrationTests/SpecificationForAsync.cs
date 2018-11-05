@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Nimbus.Tests.Common.Extensions;
+using Nimbus.Tests.Common.Stubs;
 using NUnit.Framework;
 
 namespace Nimbus.IntegrationTests
@@ -20,7 +21,7 @@ namespace Nimbus.IntegrationTests
 
         private Stopwatch _sw;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             Task.Run(async () =>
@@ -46,7 +47,7 @@ namespace Nimbus.IntegrationTests
             TestLoggingExtensions.LogTestResult();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TestFixtureTearDown()
         {
             var disposable = Subject as IDisposable;

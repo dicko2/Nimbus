@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Nimbus.Tests.Common.Stubs;
 using NUnit.Framework;
 using Shouldly;
 
@@ -33,7 +34,7 @@ namespace Nimbus.IntegrationTests.Conventions
                 ex = exc.InnerException;
             }
 
-            ex.ShouldBeTypeOf<ArgumentNullException>();
+            ex.ShouldBeOfType<ArgumentNullException>();
         }
 
         [Test]
@@ -56,7 +57,7 @@ namespace Nimbus.IntegrationTests.Conventions
                 ex = exc.InnerException;
             }
 
-            ex.ShouldBeTypeOf<ArgumentNullException>();
+            ex.ShouldBeOfType<ArgumentNullException>();
         }
 
         [Test]
@@ -79,7 +80,7 @@ namespace Nimbus.IntegrationTests.Conventions
                 ex = exc.InnerException;
             }
 
-            ex.ShouldBeTypeOf<ArgumentNullException>();
+            ex.ShouldBeOfType<ArgumentNullException>();
         }
 
         private static Type GetFodyTestsType(Assembly assembly)
