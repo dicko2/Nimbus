@@ -23,11 +23,6 @@
     <ProjectReference Include="..\..\Nimbus\Nimbus.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>

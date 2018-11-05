@@ -23,9 +23,6 @@
     <ProjectReference Include="..\..\Nimbus\Nimbus.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Data.DataSetExtensions" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
 </Project>
