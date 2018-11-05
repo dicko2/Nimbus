@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
+using Mossharbor.AzureWorkArounds.ServiceBus;
 using Nimbus.ConcurrentCollections;
 using Nimbus.Configuration;
 using Nimbus.Configuration.LargeMessages;
@@ -73,7 +74,8 @@ namespace Nimbus.Transports.AzureServiceBus
                                        () =>
                                        {
                                            var namespaceManager = NamespaceManager.CreateFromConnectionString(c.Resolve<ConnectionStringSetting>());
-                                           namespaceManager.Settings.OperationTimeout = c.Resolve<DefaultTimeoutSetting>();
+                                           //namespaceManager.UserSettings.OperationTimeout = c.Resolve<DefaultTimeoutSetting>();
+                                           //TODO add to implementation
                                            return namespaceManager;
                                        },
                                        nsm => false,
@@ -92,7 +94,8 @@ namespace Nimbus.Transports.AzureServiceBus
                                        () =>
                                        {
                                            var messagingFactory = MessagingFactory.CreateFromConnectionString(c.Resolve<ConnectionStringSetting>());
-                                           messagingFactory.PrefetchCount = c.Resolve<ConcurrentHandlerLimitSetting>();
+                                           //messagingFactory.PrefetchCount = c.Resolve<ConcurrentHandlerLimitSetting>();
+                                           //TODO add to implementation
                                            return messagingFactory;
                                        },
                                        mf => mf.IsBorked(),

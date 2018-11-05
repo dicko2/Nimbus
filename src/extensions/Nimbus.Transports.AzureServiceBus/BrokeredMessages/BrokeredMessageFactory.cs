@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.ServiceBus.Messaging;
+using Microsoft.Azure.ServiceBus;
+using Microsoft.Azure.ServiceBus.Core;
+using Microsoft.Azure.ServiceBus.InteropExtensions;
 using Nimbus.Configuration.LargeMessages.Settings;
 using Nimbus.Infrastructure;
 using Nimbus.Infrastructure.Dispatching;
@@ -41,11 +43,11 @@ namespace Nimbus.Transports.AzureServiceBus.BrokeredMessages
             _clock = clock;
         }
 
-        public Task<BrokeredMessage> BuildBrokeredMessage(NimbusMessage message)
+        public Task<Message> BuildBrokeredMessage(NimbusMessage message)
         {
             return Task.Run(async () =>
                                   {
-                                      BrokeredMessage brokeredMessage;
+                                      Message brokeredMessage;
                                       var messageBodyBytes = SerializeNimbusMessage(message);
 
                                       if (messageBodyBytes.Length > _maxLargeMessageSize)
@@ -58,14 +60,14 @@ namespace Nimbus.Transports.AzureServiceBus.BrokeredMessages
 
                                       if (messageBodyBytes.Length > _maxSmallMessageSize)
                                       {
-                                          brokeredMessage = new BrokeredMessage();
+                                          brokeredMessage = new Message();
                                           var expiresAfter = message.ExpiresAfter;
                                           var blobIdentifier = await _largeMessageBodyStore.Store(message.MessageId, messageBodyBytes, expiresAfter);
-                                          brokeredMessage.Properties[MessagePropertyKeys.LargeBodyBlobIdentifier] = blobIdentifier;
+                                          brokeredMessage.UserProperties[MessagePropertyKeys.LargeBodyBlobIdentifier] = blobIdentifier;
                                       }
                                       else
                                       {
-                                          brokeredMessage = new BrokeredMessage(messageBodyBytes);
+                                          brokeredMessage = new Message(messageBodyBytes);
                                       }
 
                                       var currentDispatchContext = _dispatchContextManager.GetCurrentDispatchContext();
@@ -77,14 +79,14 @@ namespace Nimbus.Transports.AzureServiceBus.BrokeredMessages
 
                                       foreach (var property in message.Properties)
                                       {
-                                          brokeredMessage.Properties[property.Key] = property.Value;
+                                          brokeredMessage.UserProperties[property.Key] = property.Value;
                                       }
 
                                       return brokeredMessage;
                                   });
         }
 
-        public async Task<NimbusMessage> BuildNimbusMessage(BrokeredMessage message)
+        public async Task<NimbusMessage> BuildNimbusMessage(Message message)
         {
             var nimbusMessage = await DeserializeNimbusMessage(message);
             return nimbusMessage;
@@ -98,13 +100,13 @@ namespace Nimbus.Transports.AzureServiceBus.BrokeredMessages
             return compressedBytes;
         }
 
-        public async Task<NimbusMessage> DeserializeNimbusMessage(BrokeredMessage message)
+        public async Task<NimbusMessage> DeserializeNimbusMessage(Message message)
         {
             byte[] compressedBytes;
 
             object blobId;
             string storageKey = null;
-            var isLargeMessage = message.Properties.TryGetValue(MessagePropertyKeys.LargeBodyBlobIdentifier, out blobId);
+            var isLargeMessage = message.UserProperties.TryGetValue(MessagePropertyKeys.LargeBodyBlobIdentifier, out blobId);
             if (isLargeMessage)
             {
                 storageKey = (string) blobId;

@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Azure.Management.ServiceBus;
 using Microsoft.ServiceBus;
+using Mossharbor.AzureWorkArounds.ServiceBus;
 using Nimbus.ConcurrentCollections;
 using Nimbus.Configuration;
 using Nimbus.Configuration.Settings;
@@ -52,7 +54,7 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
             if (!topicPath.StartsWith(_globalPrefix.Value)) return;
 
             _logger.Debug("Deleting topic {0}", topicPath);
-            await _namespaceManager.Value.DeleteTopicAsync(topicPath);
+            _namespaceManager.Value.DeleteTopic(topicPath);
         }
 
         private async Task DeleteQueue(string queuePath)
@@ -60,7 +62,7 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
             if (!queuePath.StartsWith(_globalPrefix.Value)) return;
 
             _logger.Debug("Deleting queue {0}", queuePath);
-            await _namespaceManager.Value.DeleteQueueAsync(queuePath);
+            _namespaceManager.Value.DeleteQueue(queuePath);
         }
     }
 }

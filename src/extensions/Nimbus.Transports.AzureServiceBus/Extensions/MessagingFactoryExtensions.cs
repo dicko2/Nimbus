@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
-using Microsoft.ServiceBus.Messaging;
+
+using Nimbus.Transports.AzureServiceBus.QueueManagement;
 
 namespace Nimbus.Transports.AzureServiceBus.Extensions
 {

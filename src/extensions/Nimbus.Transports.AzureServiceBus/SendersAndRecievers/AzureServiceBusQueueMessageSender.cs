@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Microsoft.ServiceBus.Messaging;
+using Microsoft.Azure.ServiceBus;
+using Microsoft.Azure.ServiceBus.Core;
 using Nimbus.Infrastructure.MessageSendersAndReceivers;
 using Nimbus.Infrastructure.Retries;
 using Nimbus.Transports.AzureServiceBus.BrokeredMessages;
@@ -69,12 +70,11 @@ namespace Nimbus.Transports.AzureServiceBus.SendersAndRecievers
             _messageSender = null;
 
             if (messageSender == null) return;
-            if (messageSender.IsClosed) return;
 
             try
             {
                 _logger.Debug("Discarding message sender for {QueuePath}", _queuePath);
-                messageSender.Close();
+                messageSender.CloseAsync().RunSynchronously();
             }
             catch (Exception exc)
             {

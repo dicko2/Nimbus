@@ -23,9 +23,6 @@
     <ProjectReference Include="..\..\Nimbus\Nimbus.csproj" />
   </ItemGroup>
   <ItemGroup>
-	  <PackageReference Include="WindowsAzure.ServiceBus" Version="5.0.0" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
@@ -33,5 +30,8 @@
   <ItemGroup>
     <None Include="app.config" />
     <Content Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="3.1.1" />
   </ItemGroup>
 </Project>

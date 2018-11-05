@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.ServiceBus.Messaging;
+using Microsoft.Azure.ServiceBus;
 using Nimbus.Configuration.LargeMessages.Settings;
 using Nimbus.Infrastructure;
 using Nimbus.Infrastructure.Compression;
@@ -32,7 +32,7 @@ namespace Nimbus.IntegrationTests.Tests.LargeMessageTests
                 typeProvider);
         }
 
-        private async Task<BrokeredMessage> When(BrokeredMessageFactory brokeredMessageFactory)
+        private async Task<Message> When(BrokeredMessageFactory brokeredMessageFactory)
         {
             var bigFatObject = new string(Enumerable.Range(0, 256*1024).Select(i => '.').ToArray());
             var nimbusMessage = new NimbusMessage("noPath", bigFatObject);

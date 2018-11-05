@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.ServiceBus.Messaging;
+using Microsoft.Azure.ServiceBus;
+using Microsoft.Azure.ServiceBus.Core;
 using Nimbus.Filtering.Conditions;
 
 namespace Nimbus.Transports.AzureServiceBus.QueueManagement

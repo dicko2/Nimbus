@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.ServiceBus;
+using Mossharbor.AzureWorkArounds.ServiceBus;
 using Nimbus.ConcurrentCollections;
 using Nimbus.Configuration.PoorMansIocContainer;
 using Nimbus.Configuration.Settings;

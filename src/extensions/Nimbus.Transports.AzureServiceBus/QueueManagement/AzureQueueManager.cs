@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.ServiceBus;
-using Microsoft.ServiceBus.Messaging;
+using Microsoft.Azure.ServiceBus;
+using Microsoft.Azure.ServiceBus.Core;
+using Microsoft.Azure.ServiceBus.Management;
+using Mossharbor.AzureWorkArounds.ServiceBus;
 using Nimbus.ConcurrentCollections;
 using Nimbus.Configuration.Settings;
 using Nimbus.Extensions;
@@ -13,6 +15,9 @@ using Nimbus.MessageContracts.Exceptions;
 using Nimbus.Routing;
 using Nimbus.Transports.AzureServiceBus.Extensions;
 using Nimbus.Transports.AzureServiceBus.Filtering;
+using QueueDescription = Microsoft.Azure.ServiceBus.Management.QueueDescription;
+using SubscriptionDescription = Microsoft.Azure.ServiceBus.Management.SubscriptionDescription;
+using TopicDescription = Microsoft.Azure.ServiceBus.Management.TopicDescription;
 
 namespace Nimbus.Transports.AzureServiceBus.QueueManagement
 {
@@ -70,20 +75,20 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
 
         public Task<MessageSender> CreateMessageSender(string queuePath)
         {
-            return Task.Run(async () =>
+            return Task.Run(() =>
                                   {
                                       EnsureQueueExists(queuePath);
-                                      var messageSender = await _messagingFactory().CreateMessageSenderAsync(queuePath);
+                                      var messageSender = _messagingFactory().CreateMessageSenderAsync(queuePath);
                                       return messageSender;
                                   }).ConfigureAwaitFalse();
         }
 
         public Task<MessageReceiver> CreateMessageReceiver(string queuePath)
         {
-            return Task.Run(async () =>
+            return Task.Run(() =>
                                   {
                                       EnsureQueueExists(queuePath);
-                                      var receiverAsync = await _messagingFactory().CreateMessageReceiverAsync(queuePath, ReceiveMode.ReceiveAndDelete);
+                                      var receiverAsync = _messagingFactory().CreateMessageReceiverAsync(queuePath, ReceiveMode.ReceiveAndDelete);
                                       return receiverAsync;
                                   }).ConfigureAwaitFalse();
         }
@@ -161,10 +166,9 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
         {
             return _retry.Do(() =>
                              {
-                                 var topicsAsync = _namespaceManager().GetTopicsAsync();
-                                 if (!topicsAsync.Wait(_defaultTimeout)) throw new TimeoutException("Fetching existing topics failed. Messaging endpoint did not respond in time.");
-
-                                 var topics = topicsAsync.Result;
+                                 var topicsAsync = _namespaceManager().GetTopics();
+                                 
+                                 var topics = topicsAsync;
                                  var topicPaths = new ConcurrentSet<string>(topics.Select(t => t.Path)
                                                                                   .Where(p => p.StartsWith(_globalPrefix.Value))
                                                                                   .OrderBy(p => p)
@@ -202,7 +206,7 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
                             {
                                 return _retry.DoAsync(async () =>
                                                             {
-                                                                var subscriptions = await _namespaceManager().GetSubscriptionsAsync(topicPath);
+                                                                var subscriptions = _namespaceManager().GetSubscriptions(topicPath);
 
                                                                 return subscriptions
                                                                     .Select(s => s.Name)
@@ -217,10 +221,9 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
         {
             return _retry.Do(() =>
                              {
-                                 var queuesAsync = _namespaceManager().GetQueuesAsync();
-                                 if (!queuesAsync.Wait(_defaultTimeout)) throw new TimeoutException("Fetching existing queues failed. Messaging endpoint did not respond in time.");
-
-                                 var queues = queuesAsync.Result;
+                                 var queuesAsync = _namespaceManager().GetQueues();
+                                 
+                                 var queues = queuesAsync;
                                  var queuePaths = queues.Select(q => q.Path)
                                                         .Where(p => p.StartsWith(_globalPrefix.Value))
                                                         .OrderBy(p => p)
@@ -247,7 +250,7 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
             {
                 if (_knownTopics.Value.Contains(topicPath)) return;
 
-                var topicDescription = new TopicDescription(topicPath)
+                var topicDescription = new Mossharbor.AzureWorkArounds.ServiceBus.TopicDescription(topicPath)
                                        {
                                            DefaultMessageTimeToLive = _defaultMessageTimeToLive,
                                            EnableBatchedOperations = true,
@@ -268,7 +271,7 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
                               catch (MessagingEntityAlreadyExistsException)
                               {
                               }
-                              catch (MessagingException exc)
+                              catch (Exception exc)
                               {
                                   if (!exc.Message.Contains("SubCode=40901")) throw;
 
@@ -295,7 +298,7 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
 
                 _retry.Do(() =>
                           {
-                              var subscriptionDescription = new SubscriptionDescription(topicPath, subscriptionName)
+                              var subscriptionDescription = new Mossharbor.AzureWorkArounds.ServiceBus.SubscriptionDescription(topicPath, subscriptionName)
                                                             {
                                                                 MaxDeliveryCount = _maxDeliveryAttempts,
                                                                 DefaultMessageTimeToLive = _defaultMessageTimeToLive,
@@ -312,7 +315,7 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
                               catch (MessagingEntityAlreadyExistsException)
                               {
                               }
-                              catch (MessagingException exc)
+                              catch (Exception exc)
                               {
                                   if (!exc.Message.Contains("SubCode=40901")) throw;
 
@@ -337,7 +340,7 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
 
                 _retry.Do(() =>
                           {
-                              var queueDescription = new QueueDescription(queuePath)
+                              var queueDescription = new Mossharbor.AzureWorkArounds.ServiceBus.QueueDescription(queuePath)
                                                      {
                                                          MaxDeliveryCount = _maxDeliveryAttempts,
                                                          DefaultMessageTimeToLive = _defaultMessageTimeToLive,
@@ -345,7 +348,6 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
                                                          EnableBatchedOperations = true,
                                                          RequiresDuplicateDetection = false,
                                                          RequiresSession = false,
-                                                         SupportOrdering = false,
                                                          AutoDeleteOnIdle = _autoDeleteOnIdle
                                                      };
 
@@ -360,12 +362,12 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
                               {
                                   _namespaceManager().UpdateQueue(queueDescription);
                               }
-                              catch (MessagingException exc)
+                              catch (Exception exc)
                               {
                                   if (!exc.Message.Contains("SubCode=40901")) throw;
 
                                   // SubCode=40901. Another conflicting operation is in progress. Let's see if it's created the queue for us.
-                                  if (!_namespaceManager().QueueExists(queuePath))
+                                  if (!_namespaceManager().QueueExists(queuePath, out var qd))
                                       throw new BusException($"Queue creation for '{queuePath}' failed due to a conflicting operation and that queue does not already exist.", exc)
                                           .WithData("QueuePath", queuePath);
                               }
@@ -390,6 +392,46 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
         private static string BuildSubscriptionKey(string topicPath, string subscriptionName)
         {
             return "{0}/{1}".FormatWith(topicPath, subscriptionName);
+        }
+    }
+
+    internal class MessagingFactory
+    {
+        public MessagingFactory(string connectionString)
+        {
+            ConnectionString = connectionString;
+            RetryPolicy = RetryPolicy.Default;
+        }
+        public RetryPolicy RetryPolicy { get; set; }
+        public string ConnectionString { get; }
+        public MessageSender CreateMessageSenderAsync(string queuePath)
+        {
+            return new MessageSender(ConnectionString, queuePath, RetryPolicy);
+        }
+
+        public MessageReceiver CreateMessageReceiverAsync(string queuePath, ReceiveMode receiveAndDelete)
+        {
+            return new MessageReceiver(ConnectionString, queuePath, receiveAndDelete, RetryPolicy);
+        }
+
+        public SubscriptionClient CreateSubscriptionClient(string topicPath, string subscriptionName, ReceiveMode receiveAndDelete)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TopicClient CreateTopicClient(string topicPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Close()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static MessagingFactory CreateFromConnectionString(ConnectionStringSetting resolve)
+        {
+            throw new NotImplementedException();
         }
     }
 }
