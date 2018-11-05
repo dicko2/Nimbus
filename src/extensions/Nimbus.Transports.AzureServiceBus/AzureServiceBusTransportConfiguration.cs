@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.ServiceBus;
-using Microsoft.ServiceBus.Messaging;
 using Mossharbor.AzureWorkArounds.ServiceBus;
 using Nimbus.ConcurrentCollections;
 using Nimbus.Configuration;

@@ -119,11 +119,11 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
                                 var combinedCondition = new AndCondition(filterCondition, myOwnSubscriptionFilterCondition);
                                 var filterSql = _sqlFilterExpressionGenerator.GenerateFor(combinedCondition);
 
-                                return _retry.Do(() =>
+                                return _retry.Do(async () =>
                                                  {
                                                      var subscriptionClient = _messagingFactory()
                                                          .CreateSubscriptionClient(topicPath, subscriptionName, ReceiveMode.ReceiveAndDelete);
-                                                     subscriptionClient.ReplaceFilter("$Default", filterSql);
+                                                     await subscriptionClient.ReplaceFilter("$Default", filterSql);
                                                      return subscriptionClient;
                                                  },
                                                  "Creating subscription receiver for topic " + topicPath + " and subscription " + subscriptionName + " with filter expression " +

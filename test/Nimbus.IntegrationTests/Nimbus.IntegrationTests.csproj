@@ -15,7 +15,6 @@
     <PackageReference Include="NUnit" Version="3.11.0" />
     <PackageReference Include="Serilog" Version="2.7.1" />
     <PackageReference Include="Shouldly" Version="3.0.0" />
-    <PackageReference Include="WindowsAzure.ServiceBus" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/Nimbus/Nimbus.csproj" />

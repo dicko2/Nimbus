@@ -50,7 +50,7 @@ namespace Nimbus.Transports.AzureServiceBus.DeadLetterOffice
         {
             var messageReceiver = await _queueManager.CreateDeadQueueMessageReceiver();
 
-            var brokeredMessages = await messageReceiver.PeekBatchAsync(int.MaxValue);
+            var brokeredMessages = await messageReceiver.PeekAsync(int.MaxValue);
             return brokeredMessages.Count();
         }
     }

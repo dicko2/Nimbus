@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.ServiceBus.Messaging;
+using Microsoft.Azure.ServiceBus;
+using Microsoft.Azure.ServiceBus.Core;
 using Nimbus.Configuration.Settings;
 using Nimbus.Infrastructure;
 using Nimbus.Infrastructure.MessageSendersAndReceivers;
@@ -107,11 +108,10 @@ namespace Nimbus.Transports.AzureServiceBus.SendersAndRecievers
             _messageReceiver = null;
 
             if (messageReceiver == null) return;
-            if (messageReceiver.IsClosed) return;
 
             try
             {
-                messageReceiver.Close();
+                messageReceiver.CloseAsync().RunSynchronously();
             }
             catch (Exception exc)
             {

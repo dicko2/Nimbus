@@ -58,8 +58,9 @@ namespace Nimbus.Transports.AzureServiceBus
 
         public async Task TestConnection()
         {
-            var version = await _namespaceManager().GetVersionInfoAsync();
-            _logger.Debug("Azure Service Bus transport is online with API version {ApiVersion}", version);
+            //var version = await _namespaceManager().GetVersionInfoAsync();
+            //TODO implement this
+            _logger.Debug("Azure Service Bus transport is online with API version {ApiVersion}");
         }
 
         public INimbusMessageSender GetQueueSender(string queuePath)
