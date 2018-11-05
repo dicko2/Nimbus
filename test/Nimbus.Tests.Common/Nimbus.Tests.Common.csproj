@@ -23,7 +23,6 @@
 	<ProjectReference Include="../../src/extensions/Nimbus.Transports.Redis/Nimbus.Transports.Redis.csproj" />
 	  <ProjectReference Include="../../src/extensions/Nimbus.Transports.InProcess/Nimbus.Transports.InProcess.csproj" />
 	  <ProjectReference Include="../../src/extensions/Nimbus.Transports.AzureServiceBus/Nimbus.Transports.AzureServiceBus.csproj" />
-	  <ProjectReference Include="../../src/extensions/Nimbus.Transports.WindowsServiceBus/Nimbus.Transports.WindowsServiceBus.csproj" />
     <ProjectReference Include="../../src/extensions/Nimbus.Serializers.Json/Nimbus.Serializers.Json.csproj" />
     <ProjectReference Include="../../src/extensions/Nimbus.Windsor/Nimbus.Windsor.csproj" />
     <ProjectReference Include="../../src/Nimbus.InfrastructureContracts/Nimbus.InfrastructureContracts.csproj" />
