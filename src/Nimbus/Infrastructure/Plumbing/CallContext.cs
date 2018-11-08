@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using System.Threading;
+using Nimbus.ConcurrentCollections;
 
 namespace Nimbus.Infrastructure
 {
@@ -8,11 +9,11 @@ namespace Nimbus.Infrastructure
     /// </summary>
     internal static class CallContext
     {
-        private static ConcurrentDictionary<string, AsyncLocal<object>> _data = new ConcurrentDictionary<string, AsyncLocal<object>>();
+        private static ThreadSafeDictionary<string, AsyncLocal<object>> _data = new ThreadSafeDictionary<string, AsyncLocal<object>>();
 
         internal static void LogicalSetData(string key, object obj)
         {
-            _data.GetOrAdd(key, new AsyncLocal<object>()).Value = obj;
+            _data.GetOrAdd(key, (s) => new AsyncLocal<object>()).Value = obj;
         }
 
         internal static object LogicalGetData(string key)

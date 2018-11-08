@@ -1,14 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0; net462</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0; net462</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="ConfigInjector" Version="3.0.36" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
-    <PackageReference Include="Microsoft.WindowsAzure.ConfigurationManager" Version="3.2.3" />
     <PackageReference Include="nunit" Version="3.11.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
     <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.1" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />

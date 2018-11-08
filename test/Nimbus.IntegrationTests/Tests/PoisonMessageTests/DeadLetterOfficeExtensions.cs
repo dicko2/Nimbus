@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace Nimbus.IntegrationTests.Tests.PoisonMessageTests
 {
@@ -29,6 +30,11 @@ namespace Nimbus.IntegrationTests.Tests.PoisonMessageTests
                 if (message == null)
                 {
                     if (messages.Count == numMessagesExpected) break;
+
+                    if (messages.Count > numMessagesExpected)
+                    {
+                        Assert.Fail("More messages than expected");
+                    }
                     await Task.Delay(TimeSpan.FromMilliseconds(100));
                     continue;
                 }

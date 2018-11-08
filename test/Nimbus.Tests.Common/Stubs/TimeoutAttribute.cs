@@ -7,7 +7,7 @@ using NUnit.Framework.Internal;
 
 namespace Nimbus.Tests.Common.Stubs
 {
-#if NETSTANDARD2_0
+#if NETCOREAPP2_0
     /// <summary>
     /// Applies a timeout in milliseconds to a test. 
     /// When applied to a method, the test is cancelled if the timeout is exceeded. 

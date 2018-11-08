@@ -2,7 +2,7 @@
 
 namespace Nimbus.Infrastructure
 {
-    public interface IMessageDispatcher
+    internal interface IMessageDispatcher
     {
         Task Dispatch(NimbusMessage message);
     }

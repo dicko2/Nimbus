@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  <TargetFrameworks>netcoreapp2.0; net462</TargetFrameworks>
+    <Configurations>Debug;Release</Configurations>
+    <AssemblyTitle>Nimbus.Tests.TestAssemblies.Handlers</AssemblyTitle>
+    <Company></Company>
+    <Product>Nimbus.Tests.TestAssemblies.Handlers</Product>
+    <Description></Description>
+    <Copyright>Copyright ©  2013</Copyright>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <Version>3.0.1-issue-275.1+1.Branch.issue-275.Sha.eb45429cc623454c47e51ab9a75c946ca7fae0c2</Version>
+    <AssemblyVersion>3.0.1.0</AssemblyVersion>
+    <FileVersion>3.0.1.0</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Nimbus.InfrastructureContracts\Nimbus.InfrastructureContracts.csproj" />
+    <ProjectReference Include="..\..\src\Nimbus.MessageContracts\Nimbus.MessageContracts.csproj" />
+    <ProjectReference Include="..\Nimbus.UnitTests.TestAssemblies.MessageContracts\Nimbus.UnitTests.TestAssemblies.MessageContracts.csproj" />
+    <ProjectReference Include="..\..\src\Nimbus\Nimbus.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.11.0" />
+	  <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.4.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+</Project>

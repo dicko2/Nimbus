@@ -11,7 +11,7 @@ using Nimbus.Infrastructure.MessageSendersAndReceivers;
 namespace Nimbus.Infrastructure
 {
     [DebuggerDisplay("{_receiver}")]
-    public class MessagePump : IMessagePump
+    internal class MessagePump : IMessagePump
     {
         private readonly EnableDeadLetteringOnMessageExpirationSetting _enableDeadLetteringOnMessageExpiration;
         private readonly MaxDeliveryAttemptSetting _maxDeliveryAttempts;
