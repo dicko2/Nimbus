@@ -1,8 +1,9 @@
 using System;
-using System.Threading;
 using Nimbus.ConcurrentCollections;
 using Nimbus.Extensions;
-
+#if NET462
+using System.Runtime.Remoting.Messaging;
+#endif
 namespace Nimbus.Infrastructure.Dispatching
 {
     internal class DispatchContextManager : IDispatchContextManager
@@ -19,15 +20,15 @@ namespace Nimbus.Infrastructure.Dispatching
 
             SubsequentDispatchContext dispatchContext;
             return (_store.TryGetValue(currentDispatchContextId.Value, out dispatchContext))
-                ? (IDispatchContext)dispatchContext
+                ? (IDispatchContext) dispatchContext
                 : new InitialDispatchContext();
         }
 
         public IDisposable StartNewDispatchContext(IDispatchContext dispatchContext)
         {
             AssertCanStartDispatch(dispatchContext);
-
-            if (!_store.TryAdd(dispatchContext.DispatchId, (SubsequentDispatchContext)dispatchContext))
+            
+            if (!_store.TryAdd(dispatchContext.DispatchId, (SubsequentDispatchContext) dispatchContext))
                 throw new InvalidOperationException("Cannot add duplicate {0} {1} to the {0} store."
                                                         .FormatWith(typeof(SubsequentDispatchContext).Name, dispatchContext.DispatchId));
 
@@ -56,7 +57,7 @@ namespace Nimbus.Infrastructure.Dispatching
             if (currentDispatchId != null)
                 throw new InvalidOperationException("Dispatch {0} is already in progress in this Logical CallContext. Did you forget to Dispose it?"
                                                         .FormatWith(currentDispatchId));
-
+            
             if (dispatchContext is InitialDispatchContext)
                 throw new InvalidOperationException("Don't start a Dispatch with a {0}, use a new {1} instead."
                                                         .FormatWith(typeof(InitialDispatchContext).Name, typeof(SubsequentDispatchContext).Name));
@@ -64,17 +65,29 @@ namespace Nimbus.Infrastructure.Dispatching
 
         private static void ClearCurrentDispatchId()
         {
+#if NET462
+            System.Runtime.Remoting.Messaging.CallContext.LogicalSetData(_currentDispatchIdDataSlotName, null);
+#else
             CallContext.LogicalSetData(_currentDispatchIdDataSlotName, null);
+#endif
         }
 
         private static void SetCurrentDispatchId(Guid dispatchId)
         {
+#if NET462
+            System.Runtime.Remoting.Messaging.CallContext.LogicalSetData(_currentDispatchIdDataSlotName, dispatchId);
+#else
             CallContext.LogicalSetData(_currentDispatchIdDataSlotName, dispatchId);
+#endif
         }
 
         private static Guid? GetCurrentDispatchContextId()
         {
+#if NET462
+            return System.Runtime.Remoting.Messaging.CallContext.LogicalGetData(_currentDispatchIdDataSlotName) as Guid?;
+#else
             return CallContext.LogicalGetData(_currentDispatchIdDataSlotName) as Guid?;
+#endif
         }
 
         private sealed class DispatchContextWrapper : IDisposable

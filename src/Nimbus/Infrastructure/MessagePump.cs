@@ -50,7 +50,7 @@ namespace Nimbus.Infrastructure
             _deliveryRetryStrategy = deliveryRetryStrategy;
         }
 
-        public virtual async Task Start()
+        public async Task Start()
         {
             await _startStopSemaphore.WaitAsync();
 
@@ -70,7 +70,7 @@ namespace Nimbus.Infrastructure
             }
         }
 
-        public virtual async Task Stop()
+        public async Task Stop()
         {
             await _startStopSemaphore.WaitAsync();
 

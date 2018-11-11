@@ -28,18 +28,13 @@
 	  <PackageReference Include="Autofac" Version="4.8.1" />
 	  <PackageReference Include="Castle.Core" Version="4.2.1" />
 	  <PackageReference Include="Castle.Windsor" Version="4.1.0" />
-    <PackageReference Include="Microsoft.WindowsAzure.ConfigurationManager" Version="2.0.3" />
     <PackageReference Include="Ninject" Version="3.3.4" />
-    <PackageReference Include="NSubstitute" Version="1.7.1.0" />
+    <PackageReference Include="NSubstitute" Version="3.1.0" />
 	  <PackageReference Include="NUnit" Version="3.11.0" />
 	  <PackageReference Include="Serilog" Version="2.7.1" />
-	  <PackageReference Include="Shouldly" Version="3.0.0" />
+	  <PackageReference Include="Shouldly" Version="3.0.2" />
 	  <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
-	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Data.DataSetExtensions" />
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="SpecificationFor.cs">

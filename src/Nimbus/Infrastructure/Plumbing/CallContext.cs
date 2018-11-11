@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using Nimbus.ConcurrentCollections;
@@ -5,27 +6,27 @@ using Nimbus.ConcurrentCollections;
 namespace Nimbus.Infrastructure
 {
     /// <summary>
-    /// Re-implementation of CallContext for use with .NET Core / .NET Standard
+    /// Provides a way to set contextual data that flows with the call and 
+    /// async context of a test or invocation.
     /// </summary>
-    internal static class CallContext
+    public static class CallContext
     {
-        private static ThreadSafeDictionary<string, AsyncLocal<object>> _data = new ThreadSafeDictionary<string, AsyncLocal<object>>();
+        static ConcurrentDictionary<string, AsyncLocal<object>> state = new ConcurrentDictionary<string, AsyncLocal<object>>();
 
-        internal static void LogicalSetData(string key, object obj)
-        {
-            _data.GetOrAdd(key, (s) => new AsyncLocal<object>()).Value = obj;
-        }
+        /// <summary>
+        /// Stores a given object and associates it with the specified name.
+        /// </summary>
+        /// <param name="name">The name with which to associate the new item in the call context.</param>
+        /// <param name="data">The object to store in the call context.</param>
+        public static void LogicalSetData(string name, object data) =>
+            state.GetOrAdd(name, _ => new AsyncLocal<object>()).Value = data;
 
-        internal static object LogicalGetData(string key)
-        {
-            AsyncLocal<object> val;
-
-            if (_data.TryGetValue(key, out val))
-            {
-                return val;
-            }
-
-            return null;
-        }
+        /// <summary>
+        /// Retrieves an object with the specified name from the <see cref="CallContext"/>.
+        /// </summary>
+        /// <param name="name">The name of the item in the call context.</param>
+        /// <returns>The object in the call context associated with the specified name, or <see langword="null"/> if not found.</returns>
+        public static object LogicalGetData(string name) =>
+            state.TryGetValue(name, out AsyncLocal<object> data) ? data.Value : null;
     }
 }
