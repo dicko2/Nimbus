@@ -28,7 +28,7 @@
     <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="2.1.1" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
-
+	  <PackageReference Include="TeamCity.VSTest.TestAdapter" Version="1.0.10" />
 	  <PackageReference Include="NUnit" Version="3.11.0" />
 	  <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
 	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />

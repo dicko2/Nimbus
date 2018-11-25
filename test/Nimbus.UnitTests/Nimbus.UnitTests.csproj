@@ -25,6 +25,7 @@
     <ProjectReference Include="..\Nimbus.UnitTests.TestAssemblies.MessageContracts\Nimbus.UnitTests.TestAssemblies.MessageContracts.csproj" />
   </ItemGroup>
   <ItemGroup>
+	  <PackageReference Include="TeamCity.VSTest.TestAdapter" Version="1.0.10" />
 	  <PackageReference Include="Autofac" Version="4.8.1" />
 	  <PackageReference Include="Castle.Core" Version="4.2.1" />
 	  <PackageReference Include="Castle.Windsor" Version="4.1.0" />
