@@ -7,3 +7,7 @@ _ReSharper.*
 *.ncrunchproject
 .gitignore
 .vs
+
+# Cake
+tools
+artifacts

@@ -1,8 +1,9 @@
 using System;
-using System.Runtime.Remoting.Messaging;
 using Nimbus.ConcurrentCollections;
 using Nimbus.Extensions;
-
+#if NET462
+using System.Runtime.Remoting.Messaging;
+#endif
 namespace Nimbus.Infrastructure.Dispatching
 {
     internal class DispatchContextManager : IDispatchContextManager
@@ -49,7 +50,7 @@ namespace Nimbus.Infrastructure.Dispatching
             _store.TryRemove(dispatchContextId, out removed);
         }
 
-// ReSharper disable once UnusedParameter.Local
+        // ReSharper disable once UnusedParameter.Local
         private static void AssertCanStartDispatch(IDispatchContext dispatchContext)
         {
             var currentDispatchId = GetCurrentDispatchContextId();
@@ -64,17 +65,29 @@ namespace Nimbus.Infrastructure.Dispatching
 
         private static void ClearCurrentDispatchId()
         {
+#if NET462
+            System.Runtime.Remoting.Messaging.CallContext.LogicalSetData(_currentDispatchIdDataSlotName, null);
+#else
             CallContext.LogicalSetData(_currentDispatchIdDataSlotName, null);
+#endif
         }
 
         private static void SetCurrentDispatchId(Guid dispatchId)
         {
+#if NET462
+            System.Runtime.Remoting.Messaging.CallContext.LogicalSetData(_currentDispatchIdDataSlotName, dispatchId);
+#else
             CallContext.LogicalSetData(_currentDispatchIdDataSlotName, dispatchId);
+#endif
         }
 
         private static Guid? GetCurrentDispatchContextId()
         {
+#if NET462
+            return System.Runtime.Remoting.Messaging.CallContext.LogicalGetData(_currentDispatchIdDataSlotName) as Guid?;
+#else
             return CallContext.LogicalGetData(_currentDispatchIdDataSlotName) as Guid?;
+#endif
         }
 
         private sealed class DispatchContextWrapper : IDisposable

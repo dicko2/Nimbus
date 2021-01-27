@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Castle Windsor extensions for Nimbus.</Description>
+    <AssemblyTitle>Nimbus.Windsor</AssemblyTitle>
+    <AssemblyName>Nimbus.Windsor</AssemblyName>
+    <PackageId>Nimbus.Windsor</PackageId>
+    <Authors>Damian Maclennan and Andrew Harcourt</Authors>
+    <PackageProjectUrl>http://nimbusapi.com/</PackageProjectUrl>
+    <PackageTags>azure servicebus castle windsor</PackageTags>
+    <TargetFrameworks>netstandard2.0; net462</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.2.1" />
+    <PackageReference Include="Castle.Windsor" Version="4.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../Nimbus/Nimbus.csproj" />
+    <ProjectReference Include="../../Nimbus.InfrastructureContracts/Nimbus.InfrastructureContracts.csproj" />
+    <ProjectReference Include="../../Nimbus.MessageContracts/Nimbus.MessageContracts.csproj" />
+  </ItemGroup>
+  <!-- Mono Reference Assemblies for non Windows Build Environments -->
+  <PropertyGroup Condition="'$(MonoReferenceAssemblies)' != ''">
+    <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net462'">$(MonoReferenceAssemblies)/4.6.2-api</FrameworkPathOverride>
+  </PropertyGroup>
+</Project>

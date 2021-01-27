@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2.0; net462</TargetFrameworks>
+    <Configurations>Debug;Release</Configurations>
+    <AssemblyTitle>Nimbus.Transports.InProcess</AssemblyTitle>
+    <Company></Company>
+    <Product>Nimbus.Transports.InProcess</Product>
+    <Description>In-process transport layer for Nimbus.</Description>
+    <Copyright>Copyright 2015</Copyright>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <Version>0.0.1</Version>
+    <AssemblyVersion>3.0.1.0</AssemblyVersion>
+    <FileVersion>3.0.1.0</FileVersion>
+    <Authors>Damian Maclennan and Andrew Harcourt</Authors>
+    <PackageId>Nimbus.Transports.InProcess</PackageId>
+    <PackageProjectUrl>http://nimbusapi.com/</PackageProjectUrl>
+    <PackageReleaseNotes>.</PackageReleaseNotes>
+    <PackageTags>.NET service bus messaging in-process</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Nimbus.InfrastructureContracts\Nimbus.InfrastructureContracts.csproj" />
+    <ProjectReference Include="..\..\Nimbus.MessageContracts\Nimbus.MessageContracts.csproj" />
+    <ProjectReference Include="..\..\Nimbus\Nimbus.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FodyWeavers.xml" />
+  </ItemGroup>
+</Project>

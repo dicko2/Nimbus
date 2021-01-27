@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Azure blob storage extensions for large message support in Nimbus.</Description>
+    <AssemblyTitle>Nimbus.LargeMessages.Azure</AssemblyTitle>
+    <AssemblyName>Nimbus.LargeMessages.Azure</AssemblyName>
+    <PackageId>Nimbus.LargeMessages.Azure</PackageId>
+    <Authors>Damian Maclennan, Andrew Harcourt</Authors>
+    <PackageProjectUrl>http://nimbusapi.com/</PackageProjectUrl>
+    <PackageTags>azure,servicebus,autofac</PackageTags>
+    <TargetFrameworks>netstandard2.0; net462</TargetFrameworks>
+  </PropertyGroup>
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>Nimbus.IntegrationTests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WindowsAzure.Storage" Version="9.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../Nimbus/Nimbus.csproj" />
+    <ProjectReference Include="../../Nimbus.InfrastructureContracts/Nimbus.InfrastructureContracts.csproj" />
+    <ProjectReference Include="../../Nimbus.MessageContracts/Nimbus.MessageContracts.csproj" />
+  </ItemGroup>
+  <!-- Mono Reference Assemblies for non Windows Build Environments -->
+  <PropertyGroup Condition="'$(MonoReferenceAssemblies)' != ''">
+    <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net462'">$(MonoReferenceAssemblies)/4.6.2-api</FrameworkPathOverride>
+  </PropertyGroup>
+</Project>

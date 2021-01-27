@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2.0; net462</TargetFrameworks>
+    <Configurations>Debug;Release</Configurations>
+    <AssemblyTitle>Nimbus.Transports.AzureServiceBus</AssemblyTitle>
+    <Company></Company>
+    <Product>Nimbus.Transports.AzureServiceBus</Product>
+    <Description>Windows Service Bus (on-premises and Azure) transport layer for Nimbus</Description>
+    <Copyright>Copyright 2013</Copyright>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <Version>0.0.1</Version>
+    <AssemblyVersion>3.0.1.0</AssemblyVersion>
+    <FileVersion>3.0.1.0</FileVersion>
+    <Authors>Damian Maclennan and Andrew Harcourt</Authors>
+    <PackageId>Nimbus.Transports.AzureServiceBus</PackageId>
+    <PackageProjectUrl>http://nimbusapi.com/</PackageProjectUrl>
+    <PackageReleaseNotes>Init.</PackageReleaseNotes>
+    <PackageTags>.NET service bus messaging Windows Service Bus Azure Service Bus WSB ASB</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Nimbus.InfrastructureContracts\Nimbus.InfrastructureContracts.csproj" />
+    <ProjectReference Include="..\..\Nimbus.MessageContracts\Nimbus.MessageContracts.csproj" />
+    <ProjectReference Include="..\..\Nimbus\Nimbus.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <Content Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Management.ServiceBus" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="3.1.1" />
+    <PackageReference Include="Mossharbor.AzureWorkArounds.ServiceBus" Version="1.0.20" />
+  </ItemGroup>
+</Project>

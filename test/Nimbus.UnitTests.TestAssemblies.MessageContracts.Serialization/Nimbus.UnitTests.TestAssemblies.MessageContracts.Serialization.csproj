@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  <TargetFrameworks>netcoreapp2.0; net462</TargetFrameworks>
+    <Configurations>Debug;Release</Configurations>
+    <AssemblyTitle>Nimbus.UnitTests.TestAssemblies.MessageContracts.Serialization</AssemblyTitle>
+    <Company></Company>
+    <Product>Nimbus.UnitTests.TestAssemblies.MessageContracts.Serialization</Product>
+    <Description></Description>
+    <Copyright>Copyright ©  2014</Copyright>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <Version>3.0.1-issue-275.1+1.Branch.issue-275.Sha.eb45429cc623454c47e51ab9a75c946ca7fae0c2</Version>
+    <AssemblyVersion>3.0.1.0</AssemblyVersion>
+    <FileVersion>3.0.1.0</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Nimbus.MessageContracts\Nimbus.MessageContracts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	  <PackageReference Include="nunit" Version="3.11.0" />
+	  <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+	  <PackageReference Include="TeamCity.VSTest.TestAdapter" Version="1.0.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+</Project>

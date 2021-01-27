@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Unity extensions for Nimbus.</Description>
+    <AssemblyTitle>Nimbus.Unity</AssemblyTitle>
+    <AssemblyName>Nimbus.Unity</AssemblyName>
+    <PackageId>Nimbus.Unity</PackageId>
+    <Authors>Stuart Blackler</Authors>
+    <PackageProjectUrl>http://nimbusapi.com/</PackageProjectUrl>
+    <PackageTags>azure servicebus unity nimbus</PackageTags>
+    <TargetFrameworks>netstandard2.0; net462</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CommonServiceLocation" Version="1.0.0" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.3" />
+    <PackageReference Include="Unity" Version="5.8.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../Nimbus/Nimbus.csproj" />
+    <ProjectReference Include="../../Nimbus.InfrastructureContracts/Nimbus.InfrastructureContracts.csproj" />
+    <ProjectReference Include="../../Nimbus.MessageContracts/Nimbus.MessageContracts.csproj" />
+  </ItemGroup>
+  <!-- Mono Reference Assemblies for non Windows Build Environments -->
+  <PropertyGroup Condition="'$(MonoReferenceAssemblies)' != ''">
+    <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net462'">$(MonoReferenceAssemblies)/4.6.2-api</FrameworkPathOverride>
+  </PropertyGroup>
+</Project>

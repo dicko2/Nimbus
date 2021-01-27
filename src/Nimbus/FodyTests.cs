@@ -1,4 +1,4 @@
-﻿using Nimbus.Properties;
+﻿//using Nimbus.Properties;
 
 namespace Nimbus
 {
@@ -19,7 +19,7 @@ namespace Nimbus
         {
         }
 
-        [UsedImplicitly]
+        //[UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
         // ReSharper disable once UnusedParameter.Local
         private void DoBar(object o)

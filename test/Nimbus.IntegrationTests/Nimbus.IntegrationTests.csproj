@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.0; net462</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="nunit" Version="3.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Castle.Core" Version="4.2.1" />
+    <PackageReference Include="Castle.Windsor" Version="4.1.0" />
+    <PackageReference Include="ConfigInjector" Version="3.0.36" />
+    <PackageReference Include="Serilog" Version="2.7.1" />
+    <PackageReference Include="Shouldly" Version="3.0.2" />
+    <PackageReference Include="TeamCity.VSTest.TestAdapter" Version="1.0.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Nimbus/Nimbus.csproj" />
+    <ProjectReference Include="../../src/Nimbus.InfrastructureContracts/Nimbus.InfrastructureContracts.csproj" />
+    <ProjectReference Include="../../src/Nimbus.MessageContracts/Nimbus.MessageContracts.csproj" />
+    <ProjectReference Include="../Nimbus.Tests.Common/Nimbus.Tests.Common.csproj" />
+  </ItemGroup>
+  <!-- Mono Reference Assemblies for non Windows Build Environments -->
+  <PropertyGroup Condition="'$(MonoReferenceAssemblies)' != ''">
+    <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net462'">$(MonoReferenceAssemblies)/4.6.2-api</FrameworkPathOverride>
+  </PropertyGroup>
+</Project>

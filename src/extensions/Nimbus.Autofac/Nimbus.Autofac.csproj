@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Autofac extensions for Nimbus.</Description>
+    <AssemblyTitle>Nimbus.Autofac</AssemblyTitle>
+    <AssemblyName>Nimbus.Autofac</AssemblyName>
+    <PackageId>Nimbus.Autofac</PackageId>
+    <Authors>Damian Maclennan, Andrew Harcourt</Authors>
+    <PackageProjectUrl>http://nimbusapi.com/</PackageProjectUrl>
+    <PackageTags>azure,servicebus,autofac</PackageTags>
+    <TargetFrameworks>netstandard2.0; net462</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../Nimbus/Nimbus.csproj" />
+    <ProjectReference Include="../../Nimbus.InfrastructureContracts/Nimbus.InfrastructureContracts.csproj" />
+    <ProjectReference Include="../../Nimbus.MessageContracts/Nimbus.MessageContracts.csproj" />
+  </ItemGroup>
+  <!-- Mono Reference Assemblies for non Windows Build Environments -->
+  <PropertyGroup Condition="'$(MonoReferenceAssemblies)' != ''">
+    <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net462'">$(MonoReferenceAssemblies)/4.6.2-api</FrameworkPathOverride>
+  </PropertyGroup>
+</Project>

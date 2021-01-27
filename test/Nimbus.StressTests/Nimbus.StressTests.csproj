@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net462;netcoreapp2.0</TargetFrameworks>
+    <Configurations>Debug;Release</Configurations>
+    <AssemblyTitle>Nimbus.StressTests</AssemblyTitle>
+    <Company></Company>
+    <Product>Nimbus.StressTests</Product>
+    <Description></Description>
+    <Copyright>Copyright ©  2014</Copyright>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <Version>3.0.1-issue-275.1+1.Branch.issue-275.Sha.eb45429cc623454c47e51ab9a75c946ca7fae0c2</Version>
+    <AssemblyVersion>3.0.1.0</AssemblyVersion>
+    <FileVersion>3.0.1.0</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Extensions\Nimbus.LargeMessages.FileSystem\Nimbus.LargeMessages.FileSystem.csproj" />
+    <ProjectReference Include="..\..\src\Extensions\Nimbus.Logger.Serilog\Nimbus.Logger.Serilog.csproj" />
+    <ProjectReference Include="..\..\src\Extensions\Nimbus.Transports.InProcess\Nimbus.Transports.InProcess.csproj" />
+    <ProjectReference Include="..\..\src\Nimbus.InfrastructureContracts\Nimbus.InfrastructureContracts.csproj" />
+    <ProjectReference Include="..\..\src\Nimbus.MessageContracts\Nimbus.MessageContracts.csproj" />
+    <ProjectReference Include="..\..\src\Nimbus\Nimbus.csproj" />
+    <ProjectReference Include="..\Nimbus.Tests.Common\Nimbus.Tests.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	  <PackageReference Include="ConfigInjector" Version="3.0.36" />
+    <PackageReference Include="Serilog.Formatting.Compact" Version="1.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="2.1.1" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
+	  <PackageReference Include="TeamCity.VSTest.TestAdapter" Version="1.0.10" />
+	  <PackageReference Include="NUnit" Version="3.11.0" />
+	  <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+	  <PackageReference Include="Serilog" Version="2.7.1" />
+	  <PackageReference Include="Shouldly" Version="3.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+</Project>
